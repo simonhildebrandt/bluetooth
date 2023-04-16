@@ -34,8 +34,10 @@ export default ({currentSlide}) => {
 
         <Text>It employs Ultra high frequency radio waves in the ISM bands, from 2.402 GHz to
         2.48 GHz. It is mainly used as an alternative to wire connections, to exchange
-        files between nearby portable devices and connect and music players with wireless
+        files between nearby portable devices and connect cell phones and music players with wireless
         headphones."</Text>
+
+        <Text>(https://en.wikipedia.org/wiki/Bluetooth)</Text>
       </Box>
       <Text>(Bluetooth 4.0 included Classic Bluetooth, Bluetooth high speed and Bluetooth
         Low Energy - we're now at Bluetooth 5.0.)</Text>
@@ -68,7 +70,7 @@ export default ({currentSlide}) => {
       <Text>
         Each of those examples is a different kind of behaviour, and in Bluetooth these behaviours are called <b>profiles.</b>
       </Text>
-      <Text><Link target="_blank" href="https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Generic_Access_Profile_(GAP)">https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Generic_Access_Profile_(GAP)</Link></Text>
+      <Text><Link target="_blank" href="https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Generic_Access_Profile_(GAP)">https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles</Link></Text>
     </Slide>
 
     <Slide id="ourprofile">
@@ -105,27 +107,18 @@ export default ({currentSlide}) => {
     </Slide>
 
     <Slide id="device">
-      <Heading size="lg">The attention getting device</Heading>
-      <Image src="assets/attention-getting-device.jpeg" objectFit='contain' boxSize="600px"/>
+      <Heading size="lg">Introducing the attention-getting device</Heading>
+      <Image src="assets/attention-getting-device.jpeg" objectFit='contain' height="600px"/>
       <Text>(With apologies to Gary Larson.)</Text>
     </Slide>
 
-    <Slide id="devicecode">
+    <Slide id="embedded">
       <Heading size="lg">A brief diversion - embedded development</Heading>
+      <Image src="assets/xiao.jpeg" objectFit='cover' mt="100px" height="300px"/>
     </Slide>
 
     <Slide id="setup">
       <Heading size="lg">Browser setup</Heading>
-      <Text>
-        <Link target="_blank" href="chrome://flags/#enable-web-bluetooth-new-permissions-backend"> chrome://flags/#enable-web-bluetooth-new-permissions-backend</Link>
-      </Text>
-      <Text>
-        Enable, then restart browser.
-      </Text>
-    </Slide>
-
-    <Slide id="xxx">
-      <Heading size="lg">XXX</Heading>
       <Text>
         <Link target="_blank" href="chrome://flags/#enable-web-bluetooth-new-permissions-backend"> chrome://flags/#enable-web-bluetooth-new-permissions-backend</Link>
       </Text>

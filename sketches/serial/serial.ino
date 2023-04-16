@@ -19,14 +19,9 @@ LIS3DHTR<TwoWire> LIS; //IIC
 #define PIN A0 //light strip connect to Pin A0 if you use XIAO RP2040, please change 0 to A0
 #define NUMPIXELS 30 //number of Led on the light strip Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-#define DELAYVAL 100 //time (in milliseconds) to pause between pixels
-#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
-  clock_prescale_set(clock_div_1);
-#endif
 
 //create a new light strip object to define the data pattern
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-
 
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
@@ -40,7 +35,7 @@ BLEServer *pServer = NULL;
 BLECharacteristic *pMotionCharacteristic;
 BLECharacteristic *pLightCharacteristic;
 
-byte lightType = 0;
+char lightType = 'a';
 
 
 class MyServerCallbacks: public BLEServerCallbacks {
@@ -59,7 +54,6 @@ class MyServerCallbacks: public BLEServerCallbacks {
 class MyCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     std::string value = pCharacteristic->getValue();
-
     lightType = value[0];
   }
 };
@@ -104,7 +98,7 @@ void setup() {
   );
 
   pLightCharacteristic->setCallbacks(new MyCallbacks());
-  int first = 0;
+  int first = 'first';
   pLightCharacteristic->setValue(first);
   
   pService->start();
@@ -113,38 +107,56 @@ void setup() {
   pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
 }
 
+
 int i = 0;
 
 void loop() {
-  delay(100);
-  float x, y, z;
-  LIS.getAcceleration(&x, &y, &z);
-  // Serial.print("x:"); Serial.println(x);
-  String result = String(x) + String(",") + String(y) + String(",") + String(z);
-  pMotionCharacteristic->setValue(result.c_str());
-  pMotionCharacteristic->notify();
+  delay(5);
 
+  if ( i % 10 == 0) {
+    float x, y, z;
+    LIS.getAcceleration(&x, &y, &z);
+    String result = String(x) + String(",") + String(y) + String(",") + String(z);
+    pMotionCharacteristic->setValue(result.c_str());
+    pMotionCharacteristic->notify();
+  }
 
-  if (i == 0) {
-      pixels.clear(); // Set all pixel colors to 'off'
+  
+  int direction = lightType == 'a' ? 1 : -1;
+  for (int b = 0; b < 5; b++) { // rows
+    for (int a = 0; a < 6; a++) { // columns
+      int led = b * 6 + a;
+  
+      byte * d;
+      d = Wheel((i + (8 * b * direction)) % 256);
+      pixels.setPixelColor(led, pixels.Color(d[0], d[1], d[2]));
+    }
   }
   
-  // The first NeoPixel in a strand is #0, second is 1, all the way up
-  // to the count of pixels minus one.
-
-  // pixels.Color() takes RGB values, from 0,0,0 up to 255,255,255
-  // Here we're using a moderately bright green color:
-  if (lightType == 0) {
-    pixels.setPixelColor(i, pixels.Color(0, 150, 0));
-  } else {
-    pixels.setPixelColor(i, pixels.Color(0, 0, 150));
-  }
-
-  pixels.show();   // Send the updated pixel colors to the hardware.
+  pixels.show();
 
   i++;
+}
 
-  if (i > NUMPIXELS) {
-    i = 0;
+// Shamelessly lifted from here: https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/#LEDStripEffectRainbowCycle
+byte * Wheel(byte WheelPos) {
+  static byte c[3];
+ 
+  if(WheelPos < 85) {
+   c[0]=WheelPos * 3;
+   c[1]=255 - WheelPos * 3;
+   c[2]=0;
+  } else if(WheelPos < 170) {
+   WheelPos -= 85;
+   c[0]=255 - WheelPos * 3;
+   c[1]=0;
+   c[2]=WheelPos * 3;
+  } else {
+   WheelPos -= 170;
+   c[0]=0;
+   c[1]=WheelPos * 3;
+   c[2]=255 - WheelPos * 3;
   }
+
+  return c;
 }

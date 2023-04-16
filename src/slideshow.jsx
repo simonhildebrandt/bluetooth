@@ -14,6 +14,11 @@ export default App = () => {
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(null);
 
+  function updateCurrentSlide(slide) {
+    setCurrentSlide(slide);
+    localStorage.setItem('currentSlide', slide)
+  }
+
   const handleKey = useCallback(event => {
     const direction = DIRECTIONS[event.code];
 
@@ -22,17 +27,15 @@ export default App = () => {
       const index = slides.indexOf(currentSlide);
       const newSlide = slides[(index + direction + slides.length) % slides.length];
       document.getElementById(newSlide).scrollIntoView();
-      setCurrentSlide(newSlide);
+      updateCurrentSlide(newSlide);
     }
   }, [slides, currentSlide]);
 
   useEffect(() => {
     const ids = [...document.querySelectorAll("div.slide")].map(s => s.id);
     setSlides(ids);
-    const firstSlide = ids[ids.length - 1];
-    // const firstSlide = ids[0];
-    setCurrentSlide(firstSlide);
-    console.log({firstSlide, ids});
+    const firstSlide = localStorage.getItem('currentSlide') || ids[0];
+    updateCurrentSlide(firstSlide);
     document.getElementById(firstSlide).scrollIntoView();
   }, []);
 
