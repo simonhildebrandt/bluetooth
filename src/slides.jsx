@@ -133,5 +133,18 @@ export default ({currentSlide}) => {
       <Bluetooth/>
     </Slide>
 
+    <Slide id="final">
+      <Heading size="lg">Thanks!</Heading>
+
+      <Text>Questions?</Text>
+
+      <Text>
+        This presentation:
+      </Text>
+      <Text>
+        <Link href="https://github.com/simonhildebrandt/bluetooth">https://github.com/simonhildebrandt/bluetooth</Link>
+      </Text>
+    </Slide>
+
   </SlideContext.Provider>
 }
