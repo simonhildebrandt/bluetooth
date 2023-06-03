@@ -14,7 +14,7 @@ export default theme = extendTheme({
   components: {
     Text: {
       baseStyle: {
-        my: 6,
+        my: 4,
         fontSize: ['16px', '24px']
       }
     },

@@ -1,11 +1,22 @@
 import React from 'react';
 
-import { Image, Box, Heading, Text, UnorderedList, ListItem, Link } from '@chakra-ui/react';
+import {
+  Image,
+  Box,
+  Heading,
+  Text,
+  UnorderedList,
+  ListItem,
+  Link,
+  HStack,
+  Flex
+} from '@chakra-ui/react';
 
 import Slide from './slide';
 import SlideContext from './slide-context';
 
 import Bluetooth from './bluetooth';
+import { FirstCode, SecondCode } from './code';
 
 
 export default ({currentSlide}) => {
@@ -21,7 +32,23 @@ export default ({currentSlide}) => {
         <Text>
           I'm interested in hardware hacking, 3D printing, laser cutting.
         </Text>
-        <Image src="assets/photo.jpg" objectFit='cover' boxSize="300px"/>
+        <HStack gap={4}>
+          <Image src="assets/photo.jpg" objectFit='cover' boxSize="300px"/>
+          <Flex flexDir="column">
+            <Text>
+              <Link href="https://login-with.link">Login-With.Link</Link> (authentication)
+            </Text>
+            <Text>
+              <Link href="https://runto.store">RunTo.Store</Link> (shopping list app)
+            </Text>
+            <Text>
+              <Link href="https://simonhildebrandt.github.io/scrawl/">Scrawl</Link> (pixel-art editor)
+            </Text>
+            <Text>
+              <Link href="https://simonhildebrandt.com">SimonHildebrandt.com</Link> (my blog)
+            </Text>
+          </Flex>
+        </HStack>
     </Slide>
 
     <Slide id="whatis">
@@ -70,13 +97,13 @@ export default ({currentSlide}) => {
       <Text>
         Each of those examples is a different kind of behaviour, and in Bluetooth these behaviours are called <b>profiles.</b>
       </Text>
-      <Text><Link target="_blank" href="https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Generic_Access_Profile_(GAP)">https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles</Link></Text>
+      <Text><Link target="_blank" href="https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Generic_Attribute_Profile_(GATT)">https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles</Link></Text>
     </Slide>
 
     <Slide id="ourprofile">
       <Heading size="lg">Working with profiles</Heading>
       <Text>
-        If Bluetooth is defined through profiles, what's the easiest way to create our own behaviour? Use the <b>Generic Attribute Profile</b> (GATT).
+        If industry uses standarised profiles for interoperability, what's the easiest way to create our own weird behaviour? Use the <b>Generic Attribute Profile</b> (GATT).
       </Text>
       <Text>
         (The GATT is actually a foundational part of the Bluetooth Low Energy standard, which was introduced as part of Bluetooth 4.0).
@@ -96,7 +123,7 @@ export default ({currentSlide}) => {
     <Slide id="characteristics">
       <Heading size="lg">GATT Characteristics</Heading>
       <Text>
-        GATT services, in turn, are a group of <b>characteristics</b>.
+        GATT services are, in turn, a group of <b>characteristics</b>.
       </Text>
       <Text>
         Each characteristic also has a unique id.
@@ -114,7 +141,17 @@ export default ({currentSlide}) => {
 
     <Slide id="embedded">
       <Heading size="lg">A brief diversion - embedded development</Heading>
-      <Image src="assets/xiao.jpeg" objectFit='cover' mt="100px" height="300px"/>
+      <HStack gap={4}>
+        <Image src="assets/xiao.jpeg" objectFit='cover' mt="100px" height="300px"/>
+        <Flex flexDir="column">
+          <Text>
+            <Link href="https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html">Seeed Studio XIAO ESP32C3</Link>
+          </Text>
+          <Text>
+            <Link href="https://www.seeedstudio.com/Seeeduino-XIAO-Expansion-board-p-4746.html">Seeed Studio Expansion Board Base for XIAO with Grove OLED</Link>
+          </Text>
+        </Flex>
+      </HStack>
     </Slide>
 
     <Slide id="setup">
@@ -125,6 +162,16 @@ export default ({currentSlide}) => {
       <Text>
         Enable, then restart browser.
       </Text>
+    </Slide>
+
+    <Slide id="essentials">
+      <Heading size="lg">Basics - Bluetooth essentials</Heading>
+      <FirstCode/>
+    </Slide>
+
+    <Slide id="security">
+      <Heading size="lg">Basics - Bluetooth security</Heading>
+      <SecondCode/>
     </Slide>
 
     <Slide id="example">

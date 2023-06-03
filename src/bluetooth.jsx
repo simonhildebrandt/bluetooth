@@ -8,8 +8,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
-  Select
+  AlertDescription
  } from '@chakra-ui/react';
 
 import Updating from './updating';

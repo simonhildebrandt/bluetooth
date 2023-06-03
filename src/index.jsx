@@ -6,7 +6,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import theme from './theme';
 import App from './app';
-import Bluetooth from './bluetooth';
 
 ReactDOM.createRoot(document.getElementById('app'))
   .render(<ChakraProvider theme={theme}><App/></ChakraProvider>);

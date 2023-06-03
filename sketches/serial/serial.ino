@@ -35,7 +35,7 @@ BLEServer *pServer = NULL;
 BLECharacteristic *pMotionCharacteristic;
 BLECharacteristic *pLightCharacteristic;
 
-char lightType = 'a';
+char lightType = 'b';
 
 
 class MyServerCallbacks: public BLEServerCallbacks {
@@ -122,14 +122,35 @@ void loop() {
   }
 
   
-  int direction = lightType == 'a' ? 1 : -1;
-  for (int b = 0; b < 5; b++) { // rows
-    for (int a = 0; a < 6; a++) { // columns
-      int led = b * 6 + a;
-  
-      byte * d;
-      d = Wheel((i + (8 * b * direction)) % 256);
-      pixels.setPixelColor(led, pixels.Color(d[0], d[1], d[2]));
+//  int direction = lightType == 'a' ? 1 : -1;
+//  for (int b = 0; b < 5; b++) { // rows
+//    for (int a = 0; a < 6; a++) { // columns
+//      int led = b * 6 + a;
+//  
+//      byte * d;
+//      d = Wheel((i + (8 * b * direction)) % 256);
+//      pixels.setPixelColor(led, pixels.Color(d[0], d[1], d[2]));
+//    }
+//  }
+//  
+  if (lightType == 'a') {
+    for (int b = 0; b < 5; b++) { // rows
+      for (int a = 0; a < 6; a++) { // columns
+        int led = b * 6 + a;
+    
+        byte * d;
+        d = Wheel((i + (8 * b)) % 256);
+        pixels.setPixelColor(led, pixels.Color(d[0], d[1], d[2]));
+      }
+    }
+  } else {
+    int cycle = i / 10;
+    byte red[] = {150, 0, 0};
+    byte blue[] = {0, 0, 150};
+    for (int a = 0; a < 30; a++) {
+      byte *color;
+      color = ((cycle + a) % 6 == 0) ? red : blue;
+      pixels.setPixelColor(a, pixels.Color(color[0], color[1], color[2]));
     }
   }
   
