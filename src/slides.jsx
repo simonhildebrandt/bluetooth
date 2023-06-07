@@ -51,6 +51,16 @@ export default ({currentSlide}) => {
         </HStack>
     </Slide>
 
+    <Slide id="why">
+      <Heading size="lg">So... why?</Heading>
+      <HStack gap={4}>
+        <Image src="assets/nanoleaf.webp" objectFit='cover' boxSize="300px"/>
+        <Text>
+          Nanoleaf tiles - these are cool, but expensive
+        </Text>
+      </HStack>
+    </Slide>
+
     <Slide id="whatis">
       <Heading size="lg">What Is Bluetooth?</Heading>
       <Box textStyle="quote">
