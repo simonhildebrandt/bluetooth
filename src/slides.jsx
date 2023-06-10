@@ -55,9 +55,14 @@ export default ({currentSlide}) => {
       <Heading size="lg">So... why?</Heading>
       <HStack gap={4}>
         <Image src="assets/nanoleaf.webp" objectFit='cover' boxSize="300px"/>
-        <Text>
-          Nanoleaf tiles - these are cool, but expensive
-        </Text>
+        <Flex flexDir="column">
+          <Text>
+            Nanoleaf tiles - these are cool, but expensive...
+          </Text>
+          <Text>
+            Could I build my own?
+          </Text>
+        </Flex>
       </HStack>
     </Slide>
 

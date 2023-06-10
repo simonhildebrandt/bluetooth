@@ -142,7 +142,7 @@ const Service =({gatt}) => {
 
 const Characteristic = ({service, charUuid}) => {
   const [characteristic, setCharacteristic] = useState(null);
-  const [value, setValue] = useState('first');
+  const [value, setValue] = useState('b');
 
   useEffect(() => {
     service.getCharacteristic(charUuid).then(characteristic => {
