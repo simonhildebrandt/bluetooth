@@ -2,6 +2,8 @@ node_modules/
 
 .envrc
 
+.DS_Store
+
 firebase_data/
 firestore-debug.log
 firebase-debug.log
